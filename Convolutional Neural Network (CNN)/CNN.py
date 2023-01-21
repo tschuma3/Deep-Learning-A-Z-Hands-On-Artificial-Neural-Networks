@@ -27,7 +27,7 @@ cnn.add(tf.keras.layers.Conv2D(filters=32, kernel_size=3, activation='relu', inp
 cnn.add(tf.keras.layers.MaxPool2D(pool_size=2, strides=2))
 
 #Adding a second convolutional layer
-cnn.add(tf.keras.layers.Conv2D(filters=32, kernel_size=3, activation='relu', input_shape=[64, 64, 3]))
+cnn.add(tf.keras.layers.Conv2D(filters=32, kernel_size=3, activation='relu'))
 cnn.add(tf.keras.layers.MaxPool2D(pool_size=2, strides=2))
 
 #Flattening
