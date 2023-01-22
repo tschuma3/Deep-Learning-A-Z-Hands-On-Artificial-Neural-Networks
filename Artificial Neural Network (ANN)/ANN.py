@@ -13,7 +13,7 @@ This neural network predicts why a bank is loosing customers and if a future cus
 #region Data Preprocessing
 
 #Create variables and organize data
-dataset = pd.read_csv(r'D:\GitHub Repos\Deep-Learning-A-Z-Hands-On-Artificial-Neural-Networks\Artificial Neural Network (ANN)\Churn_Modelling.csv')
+dataset = pd.read_csv(r'Artificial Neural Network (ANN)\Churn_Modelling.csv')
 X = dataset.iloc[:, 3:-1].values
 y = dataset.iloc[:, -1].values
 print(X)

@@ -3,6 +3,11 @@ import tensorflow as tf
 from keras.preprocessing.image import ImageDataGenerator
 from keras.preprocessing import image
 
+"""
+This neural network predicts whether and image is either a dog or a cat
+"""
+
+
 #region Data Preprocessing
 
 #Preprocessing the Training set
