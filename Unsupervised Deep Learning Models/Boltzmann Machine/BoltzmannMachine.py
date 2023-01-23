@@ -35,7 +35,7 @@ def convert(data):
 training_set = convert(training_set)
 test_set = convert(test_set)
 
-#Converting the data into Torch tensor
+#Converting the data into Torch tensors
 training_set = torch.FloatTensor(training_set)
 test_set = torch.FloatTensor(test_set)
 
@@ -61,8 +61,8 @@ class RBM():
         p_h_given_v = torch.sigmoid(activation)
         return p_h_given_v, torch.bernoulli(p_h_given_v)
     def sample_v(self, y):
-        wy = torch.mm(y, self.W.t())
-        activation = wy + self.a.expand_as(wy)
+        wy = torch.mm(y, self.W)
+        activation = wy + self.b.expand_as(wy)
         p_v_given_h = torch.sigmoid(activation)
         return p_v_given_h, torch.bernoulli(p_v_given_h)
     def train(self, v0, vk, ph0, phk):
@@ -89,13 +89,13 @@ for epoch in range(1, nb_epoch + 1):
             vk[v0<0] = v0[v0<0]
         phk,_ = rbm.sample_h(vk)
         rbm.train(v0, vk, ph0, phk)
-        train_loss += torch.mean(torch.abs(v0[v0 >= 0] - vk[v0 >= 0]))
+        train_loss += torch.mean(torch.abs(v0[v0>=0] - vk[v0>=0]))
         s += 1.
     print(f'Epoch: {str(epoch)}, Loss: {str(train_loss/s)}')
 
 #Testing the RBM
 test_loss = 0
-s = 0 
+s = 0. 
 for id_user in range(nb_users):
     v = training_set[id_user:id_user+1]
     vt = test_set[id_user:id_user+1]
@@ -103,5 +103,5 @@ for id_user in range(nb_users):
         _,h = rbm.sample_h(v)
         _,v = rbm.sample_v(h)
         test_loss += torch.mean(torch.abs(vt[vt>=0] - v[vt>=0]))
-        s += 1
+        s += 1.
 print(f'Test Loss: {str(test_loss/s)}')
